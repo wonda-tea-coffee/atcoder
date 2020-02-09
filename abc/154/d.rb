@@ -1,12 +1,17 @@
-h = gets.chomp.to_i
+n, k = gets.chomp.split.map(&:to_i)
+pn = gets.chomp.split.map(&:to_r)
 
-@memo = {}
-def solve(n)
-  return 1 if n == 1
-  return @memo[n] if @memo[n]
-
-  m = (n/2.0).floor
-  @memo[n] = 1 + solve(m)*2
+sums = []*n
+n.times do |i|
+  sums[i] = (pn[i] + 1) / 2
 end
 
-puts solve(h)
+sum = sums.take(k).inject(&:+)
+head = 0
+max = sum
+(k...n).to_a.each do |i|
+  max = [max, sum - sums[head] + sums[i]].max
+  sum = sum - sums[head] + sums[i]
+  head += 1
+end
+puts max.to_f

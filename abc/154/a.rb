@@ -1,6 +1,11 @@
-h, a = gets.chomp.split.map(&:to_i)
-if h % a == 0
-  puts h/a
+s, t = gets.chomp.split
+a, b = gets.chomp.split.map(&:to_i)
+u = gets.chomp
+
+if u == s
+  a -= 1
 else
-  puts h/a + 1
+  b -= 1
 end
+
+puts "#{a} #{b}"

@@ -40,9 +40,11 @@ while ok - ng > 1
   end
 
   if mid > 0
-    # 何もわからない
+    # 何も分からん
     cnt += nega.size * posi.size
 
+    # 正の数の配列、負の数の配列それぞれに対して、
+    # ある数を固定したときに、それとペアになりうる数を足していく
     [posi, nega].each do |a|
       l = 0
       r = a.size - 1
@@ -50,11 +52,16 @@ while ok - ng > 1
         while l < r && a[l] * a[r] > mid
           r -= 1
         end
+        # ここに到達した時点で a[l] * a[r] <= mid
+        # ex.)
+        # 1. l = r ならばカウントされない
+        # 2. a[3] * a[6] <= mid ならば a[3] * a[4], a[3] * a[5], a[3] * a[6] で 6 - 3 = 3 がカウントされる
         cnt += r - l
         l += 1
       end
     end
   else
+    # 何も分からん
     r = nega.size - 1
     0.upto(posi.size - 1) do |l|
       while r >= 0 && posi[l] * nega[r] <= mid

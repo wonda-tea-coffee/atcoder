@@ -40,7 +40,7 @@ while ok - ng > 1
   end
 
   if mid > 0
-    # 何も分からん
+    # 負数になるペア数を加算
     cnt += nega.size * posi.size
 
     # 正の数の配列、負の数の配列それぞれに対して、
@@ -61,12 +61,18 @@ while ok - ng > 1
       end
     end
   else
-    # 何も分からん
+    # mid <= 0 の場合
+    # posiは昇順、negaは降順に並んでいることに注意
+    # （ex. posi = [1, 2, 3, ...], nega = [-1, -2, -3, ...]）
     r = nega.size - 1
+    # posiのある要素を固定し、negaの要素と右から左（posi[l] * nega[r]は増大していく）へ順にペアを作っていく
     0.upto(posi.size - 1) do |l|
       while r >= 0 && posi[l] * nega[r] <= mid
         r -= 1
       end
+      # ここに来た時点で、
+      # r == -1 or posi[l] * nega[r] > mid
+      # のいずれかが true になる
       cnt += nega.size - r - 1
     end
   end

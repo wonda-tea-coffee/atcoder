@@ -1,25 +1,32 @@
-s = gets.chomp.chars.map(&:to_i)
-c = [0, 1, 2, 3, 4, 5, 5, 4, 3, 2]
+def min(a, b)
+  a < b ? a : b
+end
 
-i = s.size - 1
-while i > 0
-  if s[i] > 6
-    s[i] = 10 - s[i]
-    s[i - 1] += 1
+s = gets.chomp.reverse! + '0'
+n = s.size
+dp = Array.new(1000005){ Array.new(2) }
+0.upto(n) do |i|
+  0.upto(1) do |j|
+    dp[i][j] = 0xffffffff
   end
-  i -= 1
 end
-if s[0] > 6
-  s[0] = 10 - s[0]
-  s.unshift(1)
+dp[0][0] = 0
+
+0.upto(n - 1) do |i|
+  0.upto(1) do |j|
+    x = s[i].to_i
+    x += j
+    0.upto(9) do |a|
+      ni = i + 1
+      nj = 0
+      b = a - x
+      if b < 0
+        nj = 1
+        b += 10
+      end
+      dp[ni][nj] = min(dp[ni][nj], dp[i][j] + a + b)
+    end
+  end
 end
 
-puts "i = #{i}"
-p s.map(&:to_s).join.to_i
-
-ans = 0
-s.each do |si|
-  ans += c[si]
-end
-
-puts ans
+puts dp[n][0]

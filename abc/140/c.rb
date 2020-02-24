@@ -1,8 +1,7 @@
-n = gets.chomp.to_i
+N = gets.to_i
 b = gets.chomp.split.map(&:to_i)
-
-b_{i} >= max(a_{i}, a_{i+1})
-
-max(a1, a2) <= b1
-max(a2, a3) <= b2
-max(a3, a4) <= b3
+ans = b[0] + b[-1]
+b.each_cons(2) do |b1, b2|
+  ans += [b1, b2].min
+end
+puts ans

@@ -28,5 +28,27 @@ int main() {
   cin.tie(0);
   ios::sync_with_stdio(false);
 
+  int N, M; cin >> N >> M;
+  int S[M]; char C[M]; REP(i, M) cin >> S[i] >> C[i];
 
+  // N = 1   0〜  9
+  // N = 2  10〜 99
+  // N = 3 100〜999
+
+  int si[3] = {0, 10, 100}, ei[3] = {9, 99, 999};
+  for (int i = si[N - 1]; i <= ei[N - 1]; i++) {
+    string si = to_string(i);
+
+    bool ok = true;
+    for (int mi = 0; mi < M; mi++) {
+      ok &= si[S[mi] - 1] == C[mi];
+    }
+
+    if (ok) {
+      cout << i << endl;
+      return 0;
+    }
+  }
+
+  cout << "-1" << endl;
 }

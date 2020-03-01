@@ -28,5 +28,6 @@ int main() {
   cin.tie(0);
   ios::sync_with_stdio(false);
 
-
+  double N; cin >> N;
+  cout << ceil(N / 2) << endl;
 }

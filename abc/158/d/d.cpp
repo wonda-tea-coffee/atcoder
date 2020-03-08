@@ -38,14 +38,15 @@ const ll MOD = 1000000007; // 10^9 + 7
 int main() {
   cin.tie(0);
   ios::sync_with_stdio(false);
-  // srand((unsigned)time(NULL));
-  // fix(12)
+  srand((unsigned)time(NULL));
+  fix(12)
 
   string s; cin >> s;
   ll q; cin >> q;
-  s.reserve(q + 1);
 
-  vector<string> left, right;
+  deque<char> deq;
+  for (int i = 0; i < s.size(); i++)
+    deq.push_back(s[i]);
   
   bool rev = false;
   for (int i = 0; i < q; i++) {
@@ -55,25 +56,21 @@ int main() {
       rev = !rev;
     } else {
       int f; cin >> f;
-      string c; cin >> c;
+      char c; cin >> c;
 
       if ((f == 1 && !rev) || (f == 2 && rev)) {
-        left.push_back(c);
+        deq.push_front(c);
       } else {
-        right.push_back(c);
+        deq.push_back(c);
       }
     }
-    // outl(s)
+
+    // outl(string(deq.begin(), deq.end()))
   }
 
-  reverse(left);
-  ostringstream osLeft;
-  copy(left.begin(), left.end(), ostream_iterator<std::string>(osLeft));
+  s = string(deq.begin(), deq.end());
 
-  ostringstream osRight;
-  copy(right.begin(), right.end(), ostream_iterator<std::string>(osRight));
-
-  s = osLeft.str() + s + osRight.str();
+  // outl(s)
 
   if (rev) reverse(s);
 

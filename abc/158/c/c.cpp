@@ -41,12 +41,11 @@ int main() {
   fix(12)
 
   double a, b; cin >> a >> b;
+  int mi = max(ceil(25 * a, 2), 10 * b);
+  int ma = min(25 * (a + 1) / 2, 10 * (b + 1));
 
-  for (int i = 1; i / 10 <= b; i++) {
-    if (floor(i * 2 / 25) == a && floor(i / 10) == b) {
-      outl(i)
-      return 0;
-    }
-  }
-  outl(-1)
+  if (mi < ma)
+    outl(mi)
+  else
+    outl(-1)
 }

@@ -41,11 +41,12 @@ const ll MOD = 1000000007; // 10^9 + 7
 
 void solve() {
   int a, b, c; cin >> a >> b >> c;
-  // a + b = a - b
-  // b = 0
-  if (b == 0) outl("?");
-  else if (a + b == c) outl("+");
-  else if (a - b == c) outl("-");
+
+  bool p = a + b == c;
+  bool m = a - b == c;
+  if (p & m) outl("?");
+  else if (p & !m) outl("+");
+  else if (!p & m) outl("-");
   else outl("!");
 }
 

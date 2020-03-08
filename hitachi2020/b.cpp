@@ -40,7 +40,20 @@ using P = pair<ll,ll>;
 const ll MOD = 1000000007; // 10^9 + 7
 
 void solve() {
-  
+  ll a, b, m; cin >> a >> b >> m;
+  vector<ll> ary_a(a), ary_b(b);
+  rep(i, a) cin >> ary_a[i];
+  rep(i, b) cin >> ary_b[i];
+
+  ll ans = __INT_MAX__;
+  for (int i = 0; i < m; i++) {
+    int x, y, c; cin >> x >> y >> c;
+
+    ans = min(ans, ary_a[x - 1] + ary_b[y - 1] - c);
+  }
+
+  sort(ary_a); sort(ary_b);
+  outl(min(ans, ary_a[0] + ary_b[0]));
 }
 
 int main() {

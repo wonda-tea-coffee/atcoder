@@ -39,12 +39,21 @@ using P = pair<ll,ll>;
 
 const ll MOD = 1000000007; // 10^9 + 7
 
+// 文字列s内に文字列tがいくつ含まれるか
+int count(string s, string t) {
+  int size_s = s.size();
+  int size_t = t.size();
+  if (size_s < size_t) return 0;
+  int ret = 0;
+  for (int i = 0; i < size_s - size_t + 1; i++) {
+    if (s.substr(i, size_t) == t) ret++;
+  }
+  return ret;
+}
+
 void solve() {
   string s; cin >> s;
-  int ans = 0;
-  for (int i = 0; i < s.size(); i++)
-    if (s[i] == '2') ans++;
-  outl(ans);
+  outl(count(s, "23"));
 }
 
 int main() {

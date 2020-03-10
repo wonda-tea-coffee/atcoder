@@ -41,20 +41,24 @@ using P = pair<ll,ll>;
 const ll MOD = 1000000007; // 10^9 + 7
 
 void solve() {
-  int n, x; cin >> n >> x;
-  vector<int> a(n); rep(i, n) cin >> a[i];
+  ll n, x; cin >> n >> x;
+  vector<ll> a(n); rep(i, n) cin >> a[i];
   sort(a);
-  int ans = 0;
-  rep(i, n) {
+
+  vector<ll> b(n);
+  for (int i = 0; i < n; i++) {
     if (a[i] <= x) {
+      b[i] = a[i];
       x -= a[i];
-      ans++;
-    } else {
-      break;
     }
   }
-  if (x > 0 && ans > 0) outl(ans - 1);
-  else outl(ans);
+  if (x > 0) b[n - 1] += x;
+
+  int ans = 0;
+  rep(i, n) {
+    if (a[i] == b[i]) ans++;
+  }
+  outl(ans);
 }
 
 int main() {

@@ -40,10 +40,11 @@ using P = pair<ll,ll>;
 const ll MOD = 1000000007; // 10^9 + 7
 
 void solve() {
-  vector<int> a(3); rep(i, 3) cin >> a[i];
-  int k; cin >> k;
-  sort(a);
-  outl(a[0] + a[1] + a[2] * int(pow(2, k)));
+  int n, x; cin >> n >> x;
+  vector<int> m(n); rep(i, n) cin >> m[i];
+  sort(m);
+  rep(i, n) x -= m[i];
+  outl(n + x / m[0]);
 }
 
 int main() {

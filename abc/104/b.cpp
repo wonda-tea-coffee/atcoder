@@ -51,7 +51,7 @@ void solve() {
   }
 
   int cntC = 0;
-  for (int i = 2; i < s.size() - 2; i++) {
+  for (int i = 2; i <= s.size() - 2; i++) {
     if (s[i] == 'C') {
       cntC++;
       s[i] = 'c';

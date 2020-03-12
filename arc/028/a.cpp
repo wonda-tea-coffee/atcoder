@@ -43,7 +43,8 @@ const ll MOD = 1000000007; // 10^9 + 7
 void solve() {
   int n, a, b; cin >> n >> a >> b;
   n %= a + b;
-  if (n <= a) outl("Ant");
+  if (n == 0) outl("Bug");
+  else if (n <= a) outl("Ant");
   else outl("Bug");
 }
 

@@ -42,8 +42,9 @@ const ll MOD = 1000000007; // 10^9 + 7
 
 void solve() {
   ll n, a, b; cin >> n >> a >> b;
+
   if ((b - a) % 2 == 0) outl((b - a) / 2);
-  else outl(min(b - 1, n - a));
+  else outl(min((a + b - 1) / 2, n - (a + b - 1) / 2));
 }
 
 int main() {

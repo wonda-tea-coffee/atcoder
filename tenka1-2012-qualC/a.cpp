@@ -40,8 +40,30 @@ using P = pair<ll,ll>;
 
 const ll MOD = 1000000007; // 10^9 + 7
 
+// 正の整数n未満の素数を全て求める
+vector<int> sieve(int n) {
+  vector<bool> is_prime(n);
+  rep(i, n) is_prime[i] = true;
+
+  is_prime[1] = false;
+  for (int i = 4; i < n; i += 2) is_prime[i] = false;
+  int lim = int(sqrt(n));
+  for (int i = 3; i <= lim; i += 2) {
+    for (int j = 3; i * j < n; j += 2) {
+      is_prime[i * j] = false;
+    }
+  }
+
+  vector<int> ret;
+  for (int i = 1; i < n; i++) {
+    if (is_prime[i]) ret.push_back(i);
+  }
+  return ret;
+}
+
 void solve() {
-  
+  int n; cin >> n;
+  outl(sieve(n).size());
 }
 
 int main() {

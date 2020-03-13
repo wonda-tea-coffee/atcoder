@@ -49,7 +49,7 @@ void solve() {
     outl(n % 20 + 1);
   } else {
     // 逆順
-    outl(n - n % 20);
+    outl(20 - n % 20);
   }
 }
 

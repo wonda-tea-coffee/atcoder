@@ -41,21 +41,16 @@ using P = pair<ll,ll>;
 const ll MOD = 1000000007; // 10^9 + 7
 
 void solve() {
-  int a; cin >> a;
-  for (int i = 1; pow(i, 3) <= a; i++) {
-    if (pow(i, 3) == a) {
-      YES();
-      return;
-    }
-  }
-  NO();
+  ll n = 42;
+  while (n <= 130000000) n *= 2;
+  outl(n);
 }
 
 int main() {
   cin.tie(0);
   ios::sync_with_stdio(false);
   srand((unsigned)time(NULL));
-  fix(16);
+  fix(12);
 
   solve();
 }

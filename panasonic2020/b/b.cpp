@@ -42,7 +42,14 @@ using P = pair<ll,ll>;
 const ll MOD = 1000000007; // 10^9 + 7
 
 void solve() {
-  
+  ll h, w; cin >> h >> w;
+
+  if (w % 2 == 0) outl(h * w / 2);
+  else {
+    ll d = (h + 1) / 2;
+    ll e = h - d;
+    outl(d * ((w + 1) / 2) + e * ((w - 1) / 2));
+  }
 }
 
 int main() {

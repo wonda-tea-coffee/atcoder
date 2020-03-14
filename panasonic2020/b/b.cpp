@@ -44,7 +44,8 @@ const ll MOD = 1000000007; // 10^9 + 7
 void solve() {
   ll h, w; cin >> h >> w;
 
-  if (w % 2 == 0) outl(h * w / 2);
+  if (h == 1 || w == 1) outl(1);
+  else if (w % 2 == 0) outl(h * w / 2);
   else {
     ll d = (h + 1) / 2;
     ll e = h - d;

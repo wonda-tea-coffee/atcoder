@@ -36,6 +36,7 @@
 
 using namespace std;
 using ll = long long;
+using ld = long double;
 using P = pair<ll,ll>;
 
 const ll MOD = 1000000007; // 10^9 + 7

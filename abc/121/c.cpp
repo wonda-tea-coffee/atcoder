@@ -42,20 +42,21 @@ using P = pair<ll,ll>;
 const ll MOD = 1000000007; // 10^9 + 7
 
 void solve() {
-  priority_queue<P> q;
   ll n, m; cin >> n >> m;
+  vector<P> v(n);
   rep(i, n) {
     ll a, b; cin >> a >> b;
-    q.push(make_pair(-a, b));
+    v[i] = make_pair(a, b);
   }
+  sort(v);
 
   ll ans = 0;
-  while (!q.empty() && m > 0) {
-    P v = q.top(); q.pop();
-    int pr = -v.first;
+  for (int i = 0; i < n && m > 0; i++) {
+    ll pr = v[i].first;
+    ll am = v[i].second;
     // debug3(m, pr, v.second);
-    ans += min(m, v.second) * pr;
-    m -= min(m, v.second);
+    ans += min(m, am) * pr;
+    m -= min(m, am);
   }
   outl(ans);
 }

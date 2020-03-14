@@ -42,14 +42,16 @@ using P = pair<ll,ll>;
 const ll MOD = 1000000007; // 10^9 + 7
 
 void solve() {
-  
+  ll a, b, c; cin >> a >> b >> c;
+  if (c - a - b >= 0 && 4 * a * b < (c - a - b) * (c - a - b)) Yes();
+  else No();
 }
 
 int main() {
   cin.tie(0);
   ios::sync_with_stdio(false);
   srand((unsigned)time(NULL));
-  fix(12);
+  fix(16);
 
   solve();
 }

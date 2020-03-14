@@ -42,14 +42,22 @@ const ll MOD = 1000000007; // 10^9 + 7
 
 void solve() {
   int d, n; cin >> d >> n;
-  int cnt = 0;
-  for (int i = 1; ; i++) {
-    if (i % 100 != 0) {
+  int cnt2 = 0;
+  int k = int(pow(100, d));
+  for (int i = k; ; i += k) {
+    int cnt = 0, j = i;
+    while (j % 100 == 0) {
       cnt++;
-      if (cnt == n) break;
+      j /= 100;
+    }
+    if (cnt == d) {
+      cnt2++;
+      if (cnt2 == n) {
+        outl(i);
+        return;
+      }
     }
   }
-  outl(cnt * int(pow(100, d)));
 }
 
 int main() {

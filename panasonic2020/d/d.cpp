@@ -42,45 +42,21 @@ using P = pair<ll,ll>;
 const ll MOD = 1000000007; // 10^9 + 7
 
 int n;
-map<string, string> m;
 
-string to_key(string s) {
-  string ret = "";
-  for (int i = 0; i < n; i++) {
-    for (int j = i + 1; j < n; j++) {
-      // debug2(s[i], s[j]);
-      if (s[i] == s[j]) {
-        ret += "|" + to_string(i) + "," + to_string(j);
-      }
-    }
-  }
-  return ret;
-}
-
-void dfs(string s, int len) {
+void dfs(string s, char maxi, int len) {
   if (len == n) {
-    // debug2(s, n);
-    string k = to_key(s);
-    if (m.find(k) == m.end()) {
-      m.insert(make_pair(k, s));
-    }
+    outl(s);
     return;
   }
-  for (int i = 0; i < n; i++) 
-    dfs(s + ctos((char)'a' + i), len + 1);
+
+  for (char c = 'a'; c <= maxi + 1; c++) {
+    dfs(s + ctos((char)c), max(maxi, c), len + 1);
+  }
 }
 
 void solve() {
   cin >> n;
-  dfs("", 0);
-  // debug(m.size());
-
-  vector<string> v;
-  for (auto it = m.begin(); it != m.end(); it++)
-    v.push_back(it->second);
-  
-  sort(v);
-  for (string vi : v) outl(vi);
+  dfs("a", 'a', 1);
 }
 
 int main() {

@@ -46,10 +46,7 @@ const int dy[8] = {0, 1, 0, -1, 1, 1, -1, -1};
 void solve() {
   ld n, m; cin >> n >> m;
   if (n > 12) n -= 12;
-  ld v1 = 360 * (n / 12) + 360 * (m / (12 * 60));
-  ld v2 = 360 * m / 60;
-  ld deg = abs(v1 - v2);
-  // debug2(v1, v2);
+  ld deg = abs(30 * n - 11 * m / 2);
   outl(min(deg, 360 - deg));
 }
 

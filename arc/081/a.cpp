@@ -71,7 +71,8 @@ void solve() {
     ll f = p.first;
     ll s = p.second;
     if (s >= 4) {
-      outl(mypow(f, 2));
+      if (ans == -1) outl(mypow(f, 2));
+      else outl(ans * f);
       return;
     } else if (s >= 2) {
       if (ans == -1) ans = f;

@@ -45,18 +45,15 @@ const int dy[8] = {0, 1, 0, -1, 1, 1, -1, -1};
 
 void solve() {
   int n; cin >> n;
-  priority_queue<P> pq;
+  vector<P> v;
   rep(i, n) {
     ll a, b; cin >> a >> b;
-    pq.push(make_pair(-b, a));
+    v.emplace_back(b, a);
   }
   ll sum = 0;
-
-  while (!pq.empty()) {
-    P p = pq.top(); pq.pop();
-    ll a = p.second;
-    ll b = -p.first;
-    // debug2(a, b);
+  sort(v);
+  rep(i, n) {
+    ll a = v[i].second, b = v[i].first;
 
     sum += a;
     if (sum > b) {

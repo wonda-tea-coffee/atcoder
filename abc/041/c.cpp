@@ -53,16 +53,15 @@ void outvo(vector<T> v) {
 
 void solve() {
   int n; cin >> n;
-  vector<int> a(n), b(n);
-  map<int, int> map;
-  rep(i, n) {
-    cin >> a[i];
-    b[i] = a[i];
-    map.insert(make_pair(a[i], i + 1));
+  vector<pair<int, int>> a(n);
+  for (int i = 1; i <= n; i++) {
+    int ai; cin >> ai;
+    a[i - 1] = make_pair(-ai, i);
   }
-  sort(b); reverse(b);
+  sort(a);
   rep(i, n) {
-    outl(map[b[i]]);
+    // debug2(a[i].first, a[i].second);
+    outl(a[i].second);
   }
 }
 

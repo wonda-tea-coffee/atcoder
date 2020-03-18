@@ -50,7 +50,7 @@ void solve() {
     int a; cin >> a;
     set.insert(a);
   }
-  outl(n - set.size());
+  outl(n - set.size() - 1);
 }
 
 int main() {

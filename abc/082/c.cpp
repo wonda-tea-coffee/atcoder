@@ -52,9 +52,9 @@ void solve() {
     else map[a]++;
   }
   ll sum = 0;
-  for (auto it = map.begin(); it != map.end(); it++) {
-    if (it->first <= it->second) sum += it->second - it->first;
-    else sum += it->second;
+  for (auto p : map) {
+    if (p.first <= p.second) sum += p.second - p.first;
+    else sum += p.second;
   }
   outl(sum);
 }

@@ -52,8 +52,7 @@ ll gcd(ll a, ll b) {
 void solve() {
   ll n, m; cin >> n >> m;
   string s, t; cin >> s >> t;
-  ll g = gcd(n, m);
-  ll ans = n / g * m;
+  ll g = gcd(n, m), ans = n / g * m;
   n /= g; m /= g;
   for (ll i = 0; i < g; i++) {
     if (s[i*n] != t[i*m]) {

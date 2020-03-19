@@ -49,13 +49,16 @@ void solve() {
 
   rep(i, n) {
     int x, y, a; cin >> x >> y >> a;
-    if (a == 1) minX = x;
-    if (a == 2) maxX = x;
-    if (a == 3) minY = y;
-    if (a == 4) maxY = y;
+    if (a == 1) minX = max(minX, x);
+    if (a == 2) maxX = min(maxX, x);
+    if (a == 3) minY = max(minY, y);
+    if (a == 4) maxY = min(maxY, y);
   }
 
-  outl(max(0, (maxX - minX) * (maxY - minY)));
+  if (minX < maxX && minY < maxY)
+    outl((maxX - minX) * (maxY - minY));
+  else
+    outl(0);
 }
 
 int main() {

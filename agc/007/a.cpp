@@ -1,3 +1,6 @@
+// 解説が理解できてない
+// http://agc007.contest.atcoder.jp/data/agc/007/editorial.pdf
+
 #include <algorithm>
 #include <bitset>
 #include <cassert>

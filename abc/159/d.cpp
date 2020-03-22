@@ -48,7 +48,21 @@ const int dx[8] = {1, 0, -1, 0, 1, -1, -1, 1};
 const int dy[8] = {0, 1, 0, -1, 1, 1, -1, -1};
 
 void solve() {
-  
+  ll n; cin >> n;
+  const int MAX = 2 * 100010;
+  vector<ll> a(n), cnt(MAX, 0);
+  set<ll> set;
+  rep(i, n) {
+    cin >> a[i];
+    cnt[a[i]]++;
+    set.insert(a[i]);
+  }
+  ll sum = 0;
+  for (auto s : set) sum += cnt[s] * (cnt[s] - 1) / 2;
+  // debug(sum);
+  rep(i, n) {
+    outl(sum - (cnt[a[i]] - 1));
+  }
 }
 
 signed main() {

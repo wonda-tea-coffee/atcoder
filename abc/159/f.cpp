@@ -43,14 +43,25 @@ using ll = long long;
 using ld = long double;
 using P = pair<ll,ll>;
 
-const ll MOD = 1000000007; // 10^9 + 7
+const ll MOD = 998244353;
 const int dx[8] = {1, 0, -1, 0, 1, -1, -1, 1};
 const int dy[8] = {0, 1, 0, -1, 1, 1, -1, -1};
 
+ll solve2() {
+
+}
+
 void solve() {
-  ll h, w, k; cin >> h >> w >> k;
-  vector<string> s(h); rep(i, h) cin >> s[i];
-  
+  ll n, s; cin >> n >> s;
+  const int MAX_S = 10;
+  vector<ll> a(n); rep(i, n) cin >> a[i];
+  vector<ll> dp(MAX_S + 1, 0);
+
+  for (int i = 0; i < n; i++) {
+    a[i]
+    for (int j = i; j < n; j++) {
+    }
+  }
 }
 
 signed main() {

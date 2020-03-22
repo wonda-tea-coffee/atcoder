@@ -47,8 +47,24 @@ const ll MOD = 1000000007; // 10^9 + 7
 const int dx[8] = {1, 0, -1, 0, 1, -1, -1, 1};
 const int dy[8] = {0, 1, 0, -1, 1, 1, -1, -1};
 
+bool isReversible(string s) {
+  // debug(s);
+  string t = s;
+  reverse(t);
+  return s == t;
+}
+
 void solve() {
-  
+  string s; cin >> s;
+
+  if (!isReversible(s)) {
+    No();
+    return;
+  }
+
+  int n = s.size(), len = (n-1)/2;
+  if (isReversible(s.substr(0, len)) && isReversible(s.substr((n+1)/2, len))) Yes();
+  else No();
 }
 
 signed main() {

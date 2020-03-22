@@ -48,7 +48,9 @@ const int dx[8] = {1, 0, -1, 0, 1, -1, -1, 1};
 const int dy[8] = {0, 1, 0, -1, 1, 1, -1, -1};
 
 void solve() {
-  
+  ld l; cin >> l;
+  ld a = l / 3;
+  outl(a * a * a);
 }
 
 signed main() {

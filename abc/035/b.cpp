@@ -47,28 +47,24 @@ const int dy[8] = {0, 1, 0, -1, 1, 1, -1, -1};
 void solve() {
   string s; cin >> s;
   int t; cin >> t;
-  int x = 0, y = 0;
+  int x = 0, y = 0, cnt = 0;
   for (int i = 0; i < s.size(); i++) {
     if (s[i]=='L') x--;
     else if (s[i]=='R') x++;
     else if (s[i]=='U') y--;
     else if (s[i]=='D') y++;
-    else {
-      if (t == 1) {
-        if (x > 0) x++;
-        else if (x < 0) x--;
-        else if (y > 0) y++;
-        else y--;
-      } else {
-        if (x > 0) x--;
-        else if (x < 0) x++;
-        else if (y > 0) y--;
-        else y++;
-      }
-    }
+    else cnt++;
   }
-  debug2(x, y);
-  outl(abs(x) + abs(y));
+  if (t == 1) {
+    outl(abs(x) + abs(y) + cnt);
+  } else {
+    int ans = abs(x) + abs(y);
+    int u = min(ans, cnt);
+    ans -= u;
+    cnt -= u;
+    if (ans == 0) outl(cnt % 2);
+    else outl(ans);
+  }
 }
 
 int main() {

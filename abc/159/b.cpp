@@ -48,7 +48,6 @@ const int dx[8] = {1, 0, -1, 0, 1, -1, -1, 1};
 const int dy[8] = {0, 1, 0, -1, 1, 1, -1, -1};
 
 bool isReversible(string s) {
-  // debug(s);
   string t = s;
   reverse(t);
   return s == t;
@@ -62,8 +61,8 @@ void solve() {
     return;
   }
 
-  int n = s.size(), len = (n-1)/2;
-  if (isReversible(s.substr(0, len)) && isReversible(s.substr((n+1)/2, len))) Yes();
+  int n = s.size();
+  if (isReversible(s.substr(0, (n-1)/2)) && isReversible(s.substr((n+1)/2))) Yes();
   else No();
 }
 

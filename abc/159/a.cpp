@@ -48,7 +48,8 @@ const int dx[8] = {1, 0, -1, 0, 1, -1, -1, 1};
 const int dy[8] = {0, 1, 0, -1, 1, 1, -1, -1};
 
 void solve() {
-  
+  ll n, m; cin >> n >> m;
+  outl(n * (n - 1) / 2 + m * (m - 1) / 2);
 }
 
 signed main() {

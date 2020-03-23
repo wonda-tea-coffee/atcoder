@@ -47,24 +47,22 @@ const ll MOD = 1000000007; // 10^9 + 7
 const int dx[8] = {1, 0, -1, 0, 1, -1, -1, 1};
 const int dy[8] = {0, 1, 0, -1, 1, 1, -1, -1};
 
+ll mid(vector<ll> v) {
+  int n = v.size();
+  sort(v);
+  if (n % 2 == 0) {
+    return (v[n/2 - 1] + v[n/2])/2;
+  } else {
+    return v[n/2];
+  }
+}
+
 void solve() {
   ll n; cin >> n;
   vector<ll> a(n), b(n);
   rep(i, n) cin >> a[i] >> b[i];
-  ll ans = __LONG_LONG_MAX__;
-  rep(i, n) {
-    ll si = a[i];
-    rep(j, n) {
-      ll ei = b[j], sum = 0;
-      rep(k, n) {
-        sum += abs(si - a[k]) + abs(a[k] - b[k]) + abs(b[k] - ei);
-      }
-      if (sum < ans) {
-        // debug2(si, ei);
-        ans = sum;
-      }
-    }
-  }
+  ll ans = 0, si = mid(a), ei = mid(b);
+  rep(i, n) ans += abs(si - a[i]) + abs(a[i] - b[i]) + abs(b[i] - ei);
   outl(ans);
 }
 

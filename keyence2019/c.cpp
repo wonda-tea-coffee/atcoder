@@ -34,6 +34,9 @@
 #define debug2(x, y)    cerr << #x << ": " << (x) << ", " << #y << ": " << (y) << '\n'
 #define debug3(x, y, z) cerr << #x << ": " << (x) << ", " << #y << ": " << (y) << ", " << #z << ": " << (z) << '\n'
 #define dbg(v)          for (size_t _ = 0; _ < v.size(); ++_){ cerr << #v << "[" << _ << "] : " << v[_] << '\n'; }
+#define pb              push_back
+#define fst             first
+#define int             long long
 
 using namespace std;
 using ll = long long;
@@ -46,30 +49,33 @@ const int dy[8] = {0, 1, 0, -1, 1, 1, -1, -1};
 
 void solve() {
   ll n; cin >> n;
-  vector<ll> a(n), b(n);
+  ll ans = 0, minus = 0;
+  vector<ll> a(n);
+  vector<P> v(n);
   rep(i, n) cin >> a[i];
-  rep(i, n) cin >> b[i];
-
-  ll ans = 0, sum = 0;
   rep(i, n) {
-    if (a[i] < b[i]) {
+    ll b; cin >> b;
+    if (a[i] < b) {
+      minus += b - a[i];
       ans++;
-      sum += b[i] - a[i];
     }
+    v[i] = make_pair(b - a[i], a[i]);
+  }
+  sort(v);
+
+  for (int i = 0; i < n && v[i].first < 0 && minus > 0; i++) {
+    ll ai = v[i].second;
+    ll bi = v[i].first + ai;
+    debug2(ai, bi);
+    minus -= ai - bi;
+    ans++;
   }
 
-  rep(i, n) {
-    if (a[i] > b[i] && sum > 0) {
-      ans++;
-      sum -= a[i] - b[i];
-    }
-  }
-  // debug2(ans, sum);
-  if (sum <= 0) outl(ans);
-  else outl(-1);
+  if (minus > 0) outl(-1);
+  else outl(ans);
 }
 
-int main() {
+signed main() {
   cin.tie(0);
   ios::sync_with_stdio(false);
   srand((unsigned)time(NULL));

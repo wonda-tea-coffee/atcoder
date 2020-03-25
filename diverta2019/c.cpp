@@ -49,20 +49,20 @@ const int dy[8] = {0, 1, 0, -1, 1, 1, -1, -1};
 
 void solve() {
   ll n; cin >> n;
-  ll sb = 0, ea = 0, ba = 0, sum = 0;
+  ll c1 = 0, c2 = 0, c3 = 0, sum = 0;
   rep(i, n) {
     string s; cin >> s;
 
-    if (s[0] == 'B' && s[s.size() - 1] == 'A') ba++;
-    else if (s[0] == 'B') sb++;
-    else if (s[s.size() - 1] == 'A') ea++;
+    if (s[0] == 'B' && s[s.size() - 1] == 'A') c1++;
+    else if (s[0] == 'B') c2++;
+    else if (s[s.size() - 1] == 'A') c3++;
 
     for (int j = 1; j < s.size(); j++)
       if (s[j-1] == 'A' && s[j] == 'B') sum++;
   }
-  ll c = min(ea, sb);
-  if (ea + sb == 0) outl(sum + ba - 1);
-  else outl(sum + c + ba);
+  if (c1 == 0) outl(sum + min(c2, c3));
+  else if (c2 + c3 > 0) outl(sum + min(c2, c3) + c1);
+  else outl(sum + c1 - 1);
 }
 
 signed main() {

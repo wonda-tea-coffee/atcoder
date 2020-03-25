@@ -52,10 +52,7 @@ void solve() {
   vector<ll> a(n); rep(i, n) cin >> a[i];
   ll ans = 0, l = 0, r = 1, sum = a[0];
   while (r <= n && l <= r) {
-    // debug3(l, r, sum);
     if (sum >= k) {
-      // [l, r), [l, r+1), ..., [l, n)の分をカウント
-      // debug2("add", n - r + 1);
       ans += n - r + 1;
       sum -= a[l];
       l++;

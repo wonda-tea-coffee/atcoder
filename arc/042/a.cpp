@@ -53,20 +53,14 @@ void solve() {
   bool selected[MAX + 1] = {};
   vector<ll> ans(n, 0);
   vector<ll> a(m); rep(i, m) cin >> a[i];
-  int j = 0;
   for (int i = m - 1; i >= 0; i--) {
-    // debug3(j, i, a[i]);
     if (selected[a[i]]) continue;
-    ans[j++] = a[i];
+    outl(a[i]);
     selected[a[i]] = true;
   }
-  for (int i = 1; i <= n && j < n; i++) {
+  for (int i = 1; i <= n; i++) {
     if (selected[i]) continue;
-    ans[j++] = i;
-  }
-  rep(i, n) {
-    // debug2(i, ans[i]);
-    outl(ans[i]);
+    outl(i);
   }
 }
 

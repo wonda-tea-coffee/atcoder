@@ -34,6 +34,9 @@
 #define debug2(x, y)    cerr << #x << ": " << (x) << ", " << #y << ": " << (y) << '\n'
 #define debug3(x, y, z) cerr << #x << ": " << (x) << ", " << #y << ": " << (y) << ", " << #z << ": " << (z) << '\n'
 #define dbg(v)          for (size_t _ = 0; _ < v.size(); ++_){ cerr << #v << "[" << _ << "] : " << v[_] << '\n'; }
+#define pb              push_back
+#define fst             first
+#define int             long long
 
 using namespace std;
 using ll = long long;
@@ -44,13 +47,6 @@ const ll MOD = 1000000007; // 10^9 + 7
 const int dx[8] = {1, 0, -1, 0, 1, -1, -1, 1};
 const int dy[8] = {0, 1, 0, -1, 1, 1, -1, -1};
 
-vector<char> stocvec(string s) {
-  int n = s.size();
-  vector<char> ret(n);
-  for (int i = 0; i < n; i++) ret[i] = s[i];
-  return ret;
-}
-
 void solve() {
   string s; cin >> s;
 
@@ -59,26 +55,29 @@ void solve() {
     return;
   }
 
-  vector<int> alp(26, 0);
-  for (char c : s) alp[c-'a']++;
-  rep(i, 26) {
-    if (alp[i] == 0) {
-      outl(s + (char)('a' + i));
-      return;
+  if (s.size() < 26) {
+    vector<ll> nums(26, 0);
+    for (char si : s) nums[si-'a']++;
+
+    for (int i = 0; i < 26; i++) {
+      if (nums[i] == 0) {
+        outl(s + ctos((char)'a' + i));
+        return;
+      }
     }
   }
 
-  string t = s;
-  next_permutation(all(s));
   string ans = "";
+  string t = s;
+  next_permutation(all(t));
   for (int i = 0; i < s.size(); i++) {
-    ans += s[i];
-    if (s[i] > t[i]) break;
+    ans += t[i];
+    if (s[i] != t[i]) break;
   }
   outl(ans);
 }
 
-int main() {
+signed main() {
   cin.tie(0);
   ios::sync_with_stdio(false);
   srand((unsigned)time(NULL));

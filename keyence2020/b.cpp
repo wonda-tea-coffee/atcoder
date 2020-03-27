@@ -52,16 +52,13 @@ void solve() {
   vector<P> v(n);
   rep(i, n) {
     ll x, l; cin >> x >> l;
-    v[i] = make_pair(x + l * 2, l);
+    v[i] = make_pair(x + l, x - l);
   }
   sort(v);
   ll right = -10000000000, ans = 0;
   rep(i, n) {
-    ll lv = v[i].first - 3 * v[i].second;
-    // debug3(v[i].first - 2 * v[i].second, v[i].second, lv);
-    // debug3("  ", ans, right);
-    if (right < lv) {
-      right = lv;
+    if (right <= v[i].second) {
+      right = v[i].first;
       ans++;
     }
   }

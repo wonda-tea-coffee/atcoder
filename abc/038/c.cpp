@@ -52,12 +52,8 @@ void solve() {
   ll ans = 0, tmp = 0, cnt = 0;
   rep(i, n) {
     ll a; cin >> a;
-    if (a > tmp) {
-      cnt++;
-      // debug3(ans, cnt, i);
-    } else {
-      cnt = 1;
-    }
+    if (a > tmp) cnt++;
+    else cnt = 1;
     tmp = a;
     ans += cnt;
   }

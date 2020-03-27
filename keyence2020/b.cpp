@@ -18,9 +18,10 @@
 
 #define fix(n)          cout<<fixed<<setprecision(n)
 #define rep(i,n)        for (int i = 0; i < (n); ++i)
-#define sort(a)         sort((a).begin(), (a).end())
-#define uniq(a)         sort(a);(a).erase(unique((a).begin(), (a).end()), (a).end())
-#define reverse(a)      reverse((a).begin(), (a).end())
+#define all(a)          (a).begin(), (a).end()
+#define sort(a)         sort(all(a))
+#define uniq(a)         sort(a);(a).erase(unique(all(a), (a).end())
+#define reverse(a)      reverse(all(a))
 #define ctos(c)         string(1, (c))
 #define out(d)          cout << (d)
 #define outl(d)         std::cout<<(d)<<"\n"
@@ -33,6 +34,9 @@
 #define debug2(x, y)    cerr << #x << ": " << (x) << ", " << #y << ": " << (y) << '\n'
 #define debug3(x, y, z) cerr << #x << ": " << (x) << ", " << #y << ": " << (y) << ", " << #z << ": " << (z) << '\n'
 #define dbg(v)          for (size_t _ = 0; _ < v.size(); ++_){ cerr << #v << "[" << _ << "] : " << v[_] << '\n'; }
+#define pb              push_back
+#define fst             first
+#define int             long long
 
 using namespace std;
 using ll = long long;
@@ -43,27 +47,28 @@ const ll MOD = 1000000007; // 10^9 + 7
 const int dx[8] = {1, 0, -1, 0, 1, -1, -1, 1};
 const int dy[8] = {0, 1, 0, -1, 1, 1, -1, -1};
 
-template<class T>
-void outvo(vector<T> v) {
-  cout << v[0];
-  for (int i = 1; i < v.size(); i++)
-    cout << " " << v[i];
-  cout << endl;
-}
-
 void solve() {
-  int n, k, s; cin >> n >> k >> s;
-  vector<int> res;
-  for (int i = 0; i < k; i++) res.push_back(s);
-
-  const int MAX = 1000000000;
-  int a = s < MAX ? MAX : 1;
-  for (int i = 0; i < n - k; i++) res.push_back(a);
-
-  outvo(res);
+  ll n; cin >> n;
+  vector<P> v(n);
+  rep(i, n) {
+    ll x, l; cin >> x >> l;
+    v[i] = make_pair(x + l * 2, l);
+  }
+  sort(v);
+  ll right = -10000000000, ans = 0;
+  rep(i, n) {
+    ll lv = v[i].first - 3 * v[i].second;
+    // debug3(v[i].first - 2 * v[i].second, v[i].second, lv);
+    // debug3("  ", ans, right);
+    if (right < lv) {
+      right = lv;
+      ans++;
+    }
+  }
+  outl(ans);
 }
 
-int main() {
+signed main() {
   cin.tie(0);
   ios::sync_with_stdio(false);
   srand((unsigned)time(NULL));

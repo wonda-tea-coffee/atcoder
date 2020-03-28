@@ -49,7 +49,17 @@ const int dx[8] = {1, 0, -1, 0, 1, -1, -1, 1};
 const int dy[8] = {0, 1, 0, -1, 1, 1, -1, -1};
 
 void solve() {
-  
+  ll k, n; cin >> k >> n;
+  vector<ll> a(n);
+  rep(i, n) cin >> a[i];
+  sort(a);
+
+  ll ans = a[n-1]-a[0];
+  for (int i = 1; i < n; i++) {
+    // debug3(abs(a[i]-a[n-1]), abs(a[n-1]-k), a[i-1]);
+    ans = min(ans, abs(a[i]-a[n-1]) + abs(a[n-1]-k) + a[i-1]);
+  }
+  outl(ans);
 }
 
 signed main() {

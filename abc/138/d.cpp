@@ -47,34 +47,45 @@ const ll MOD = 1000000007; // 10^9 + 7
 const int dx[8] = {1, 0, -1, 0, 1, -1, -1, 1};
 const int dy[8] = {0, 1, 0, -1, 1, 1, -1, -1};
 
-ll n, q;
-const ll MAX = 2 * 100000;
-ll p[MAX+1] = {}, cnt[MAX+1] = {}, memo[MAX+1] = {};
-
-ll dfs(ll n) {
-  if (memo[n] > -1) return memo[n];
-  if (p[n] == -1) return cnt[n];
-  return memo[n] = (cnt[n] + dfs(p[n]));
-}
-
 void solve() {
-  memset(p, -1, sizeof(p));
-  memset(cnt, 0, sizeof(cnt));
-  memset(memo, -1, sizeof(memo));
-
-  cin >> n >> q;
+  ll n, q; cin >> n >> q;
+  vector<vector<ll>> adj(n+1);
+  vector<bool> visited(n+1, false);
+  vector<ll> cnt(n+1, 0);
   rep(i, n-1) {
     ll a, b; cin >> a >> b;
-    p[b] = a;
+    adj[a].push_back(b);
+    adj[b].push_back(a);
   }
   rep(i, q) {
     ll pi, xi; cin >> pi >> xi;
     cnt[pi] += xi;
   }
 
-  cout << dfs(1);
+  queue<ll> qn, qc;
+  qn.push(1); qc.push(cnt[1]);
+  visited[1] = true;
+
+  while (!qn.empty()) {
+    int i = qn.front(); qn.pop();
+    int c = qc.front(); qc.pop();
+
+    for (int j = 0; j < adj[i].size(); j++) {
+      int k = adj[i][j];
+      if (visited[k]) continue;
+
+      // debug2(i, k);
+
+      visited[k] = true;
+      cnt[k] += c;
+      qn.push(k);
+      qc.push(cnt[k]);
+    }
+  }
+
+  cout << cnt[1];
   for (int i = 2; i <= n; i++)
-    cout << " " << dfs(i);
+    cout << " " << cnt[i];
   cout << endl;
 }
 

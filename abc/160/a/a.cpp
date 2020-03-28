@@ -49,7 +49,9 @@ const int dx[8] = {1, 0, -1, 0, 1, -1, -1, 1};
 const int dy[8] = {0, 1, 0, -1, 1, 1, -1, -1};
 
 void solve() {
-  
+  string s; cin >> s;
+  if (s[2] == s[3] && s[4] == s[5]) Yes();
+  else No();
 }
 
 signed main() {

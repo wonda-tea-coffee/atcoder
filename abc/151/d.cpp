@@ -63,40 +63,32 @@ void solve() {
   for (int i = 0; i < dots.size(); i++) {
     int sy = dots[i].first;
     int sx = dots[i].second;
-    for (int j = i + 1; j < dots.size(); j++) {
-      int gy = dots[j].first;
-      int gx = dots[j].second;
 
-      queue<ll> qx, qy, qc;
-      qx.push(sx);
-      qy.push(sy);
-      qc.push(0);
-      visited[sy][sx] = true;
+    queue<ll> qx, qy, qc;
+    qx.push(sx);
+    qy.push(sy);
+    qc.push(0);
+    visited[sy][sx] = true;
 
-      while (!qx.empty()) {
-        int x = qx.front(); qx.pop();
-        int y = qy.front(); qy.pop();
-        int c = qc.front(); qc.pop();
+    while (!qx.empty()) {
+      int x = qx.front(); qx.pop();
+      int y = qy.front(); qy.pop();
+      int c = qc.front(); qc.pop();
+      ans = max(ans, c);
 
-        if (x == gx && y == gy) {
-          ans = max(ans, c);
-          break;
-        }
-
-        for (int k = 0; k < 4; k++) {
-          int nx = x + dx[k];
-          int ny = y + dy[k];
-          if (nx >= 0 && nx < w && ny >= 0 && ny < h && !visited[ny][nx] && grid[ny][nx] == '.') {
-            visited[ny][nx] = true;
-            qx.push(nx);
-            qy.push(ny);
-            qc.push(c + 1);
-          }
+      for (int k = 0; k < 4; k++) {
+        int nx = x + dx[k];
+        int ny = y + dy[k];
+        if (nx >= 0 && nx < w && ny >= 0 && ny < h && !visited[ny][nx] && grid[ny][nx] == '.') {
+          visited[ny][nx] = true;
+          qx.push(nx);
+          qy.push(ny);
+          qc.push(c + 1);
         }
       }
-
-      memset(visited, false, sizeof(visited));
     }
+
+    memset(visited, false, sizeof(visited));
   }
 
   outl(ans);

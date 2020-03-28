@@ -56,33 +56,15 @@ void solve() {
   rep(i, c) cin >> r[i];
   sort(p); sort(q); sort(r);
 
-  // pの大きい方からいくつとるかでループ
-  ll sump = 0, ans = 0;
-  for (int i = 0; i < x; i++) {
-    sump += p[a-1-i];
-    // pの不足分をrからとる
-    int ri = c-1;
-    ll sump2 = 0;
-    for (int j = 0; j < x-i-1 && ri >= 0; j++, ri--) {
-      sump2 += r[ri];
-    }
-    ll sumq = 0, qi = b-1;
-    for (int j = 0; j < y; j++) {
-      if (ri >= 0 && r[ri] > q[qi]) {
-        sumq += r[ri];
-        ri--;
-      } else {
-        sumq += q[qi];
-        qi--;
-      }
-    }
+  vector<ll> v(x + y + c);
+  for (int i = 0; i < x; i++) v[i] = p[a-1-i];
+  for (int i = 0; i < y; i++) v[i+x] = q[b-1-i];
+  for (int i = 0; i < c; i++) v[i+x+y] = r[i];
+  sort(v);
 
-    ll tmp = sump + sump2 + sumq;
-    if (ans < tmp) {
-      // debug3(sump, sump2, sumq);
-      ans = tmp;
-    }
-  }
+  ll ans = 0;
+  for (int i = 0; i < x+y; i++)
+    ans += v[x+y+c-i-1];
   outl(ans);
 }
 

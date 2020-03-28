@@ -36,7 +36,7 @@
 #define dbg(v)          for (size_t _ = 0; _ < v.size(); ++_){ cerr << #v << "[" << _ << "] : " << v[_] << '\n'; }
 #define pb              push_back
 #define fst             first
-#define int             long long
+// #define int             long long
 #define INF             __LONG_LONG_MAX__
 
 using namespace std;
@@ -49,7 +49,51 @@ const int dx[8] = {1, 0, -1, 0, 1, -1, -1, 1};
 const int dy[8] = {0, 1, 0, -1, 1, 1, -1, -1};
 
 void solve() {
-  
+  const int MAX = 2000;
+  int mins[MAX + 1][MAX + 1] = {{}};
+
+  debug("hgie");
+
+  for (int i = 0; i <= MAX; i++) {
+    for (int j = i + 1; j <= MAX; j++) {
+      mins[i][j] = __INT_MAX__;
+    }
+  }
+
+  ll n, x, y; cin >> n >> x >> y;
+
+  debug3(n, x, y);
+
+  vector<vector<ll>> adj(n+1);
+  for (int i = 1; i < n - 1; i++) adj[i].push_back(i + 1);
+  adj[x].push_back(y);
+
+  for (int i = 1; i < n; i++) {
+    debug(i);
+    queue<ll> qp, qs;
+    qp.push(i); qs.push(0); mins[i][i] = 0;
+    while (!qp.empty()) {
+      ll p = qp.front(); qp.pop();
+      ll s = qs.front(); qs.pop();
+
+      for (int j = 0; j < adj[p].size(); j++) {
+        int k = adj[p][j];
+        if (s + 1 < mins[p][k]) {
+          mins[p][k] = s + 1;
+          qp.push(k);
+          qs.push(s + 1);
+        }
+      }
+    }
+  }
+
+  ll ans[MAX + 1] = {};
+  for (int i = 0; i <= MAX; i++) {
+    for (int j = i + 1; j <= MAX; j++) {
+      ans[mins[i][j]]++;
+    }
+  }
+  for (int i = 1; i < n; i++) outl(ans[i]);
 }
 
 signed main() {

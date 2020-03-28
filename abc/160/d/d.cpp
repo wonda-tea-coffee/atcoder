@@ -56,8 +56,10 @@ void solve() {
   for (int i = 1; i <= n; i++) {
     for (int j = i + 1; j <= n; j++) {
       ll tmp;
-      if (j <= x || i >= y || (x < i && j < y)) tmp = j-i;
-      else if (i <= x && j >= y) tmp = j-i-(y-x)+1;
+      if (j <= x || i >= y) tmp = j-i;
+      else if (x < i && j < y) {
+        tmp = min(j-i, i-x+1+y-j);
+      } else if (i <= x && j >= y) tmp = j-i-(y-x)+1;
       else if (i <= x && j > x && j < y) {
         ll v1 = x - i;
         ll v2 = min(j-x, y-j+1);

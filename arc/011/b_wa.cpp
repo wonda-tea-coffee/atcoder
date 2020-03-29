@@ -49,7 +49,7 @@ const int dx[8] = {1, 0, -1, 0, 1, -1, -1, 1};
 const int dy[8] = {0, 1, 0, -1, 1, 1, -1, -1};
 
 const set<char> ignores = {'a','i','u','e','o','.',','};
-map<char, string> m;
+map<char, char> tbl;
 
 string convert(string w) {
   string ret = "";
@@ -57,7 +57,7 @@ string convert(string w) {
   for (char &wi : w) {
     wi = tolower(wi);
     if (ignores.find(wi) != ignores.end()) continue;
-    ret += m[wi];
+    ret += tbl[wi];
   }
 
   return ret;
@@ -66,22 +66,33 @@ string convert(string w) {
 void solve() {
   ll n; cin >> n;
 
-	m['b'] = m['c'] = "1";
-	m['d'] = m['w'] = "2";
-	m['t'] = m['j'] = "3";
-	m['f'] = m['q'] = "4";
-	m['l'] = m['v'] = "5";
-	m['s'] = m['x'] = "6";
-	m['p'] = m['m'] = "7";
-	m['h'] = m['k'] = "8";
-	m['n'] = m['g'] = "9";
-	m['z'] = m['r'] = "0";
+  tbl.insert(make_pair('b', '1'));
+  tbl.insert(make_pair('c', '1'));
+  tbl.insert(make_pair('d', '2'));
+  tbl.insert(make_pair('w', '2'));
+  tbl.insert(make_pair('t', '3'));
+  tbl.insert(make_pair('j', '3'));
+  tbl.insert(make_pair('f', '4'));
+  tbl.insert(make_pair('q', '4'));
+  tbl.insert(make_pair('l', '5'));
+  tbl.insert(make_pair('v', '5'));
+  tbl.insert(make_pair('s', '6'));
+  tbl.insert(make_pair('x', '6'));
+  tbl.insert(make_pair('p', '7'));
+  tbl.insert(make_pair('m', '7'));
+  tbl.insert(make_pair('h', '8'));
+  tbl.insert(make_pair('k', '8'));
+  tbl.insert(make_pair('n', '9'));
+  tbl.insert(make_pair('g', '9'));
+  tbl.insert(make_pair('z', '0'));
+  tbl.insert(make_pair('r', '0'));
 
   vector<string> ans;
   rep(i, n) {
     string w; cin >> w;
     string con = convert(w);
-    if (!con.empty()) ans.push_back(con);
+    if (con.size() == 0) continue;
+    ans.push_back(con);
   }
 
   if (ans.size() == 0) {

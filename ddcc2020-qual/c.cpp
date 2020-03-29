@@ -48,49 +48,56 @@ const ll MOD = 1000000007; // 10^9 + 7
 const int dx[8] = {1, 0, -1, 0, 1, -1, -1, 1};
 const int dy[8] = {0, 1, 0, -1, 1, 1, -1, -1};
 
-int n, m, k, ids;
+int h, w, k, ids;
 const int MAX = 310;
 int a[MAX][MAX];
 vector<string> s(MAX);
  
-void dfs(int sx, int sy, int ex, int ey) {
-	int pxi = -1, pyi = -1, pxj = -1, pyj = -1;
-	for (int i = sx; i <= ex; ++i) {
-		for (int j = sy; j <= ey; ++j) {
+void dfs(int sy, int sx, int ey, int ex) {
+  // cout << "sy = " << sy << ", sx = " << sx << ", ey = " << ey << ", ex = " << ex << endl;
+	int py = -1, px = -1, qy = -1, qx = -1;
+
+  // 縦に走査
+	for (int i = sy; i <= ey; i++) {
+    // 横に走査
+		for (int j = sx; j <= ex; j++) {
 			if (s[i][j] == '#') {
-				if (pxi == -1) pxi = i, pyi = j;
-				else if (pxj == -1) pxj = i, pyj = j;
+				if (py == -1) py = i, px = j;
+				else if (qy == -1) qy = i, qx = j;
       }
     }
   }
-	if (pxj == -1) {
-		++ids;
-		for (int i = sx; i <= ex; ++i) {
-			for (int j = sy; j <= ey; ++j) {
+
+  // イチゴが一個しか無かった
+	if (qy == -1) {
+		ids++;
+		for (int i = sy; i <= ey; i++) {
+			for (int j = sx; j <= ex; j++) {
 				a[i][j] = ids;
       }
     }
 		return;
   }
-	if (pxi != pxj) {
-		int z = min(pxi, pxj);
-		dfs(sx, sy, z, ey);
-		dfs(z + 1, sy, ex, ey);
+
+	if (py != qy) {
+		int z = min(px, qx);
+		dfs(sy,  sx, ey,  z);
+		dfs(sy, z+1, ey, ex);
 	} else {
-		int z = min(pyi, pyj);
-		dfs(sx, sy, ex, z);
-		dfs(sx, z + 1, ex, ey);
+		int z = min(py, qy);
+		dfs( sy, sx,  z, ex);
+		dfs(z+1, sx, ey, ex);
   }
 }
 
 void solve() {
-	cin >> n >> m >> k;
-	rep(i, n) cin >> s[i];
+	cin >> h >> w >> k;
+	rep(i, h) cin >> s[i];
 
-	dfs(0, 0, n-1, m-1);
+	dfs(0, 0, h-1, w-1);
 
-	for (int i = 0; i < n; ++i, puts(""))
-		for (int j = 0; j < m; ++j) cout << a[i][j] << " ";
+	for (int i = 0; i < h; i++, puts(""))
+		for (int j = 0; j < w; j++) cout << a[i][j] << " ";
 }
 
 signed main() {

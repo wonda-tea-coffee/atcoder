@@ -48,8 +48,49 @@ const ll MOD = 1000000007; // 10^9 + 7
 const int dx[8] = {1, 0, -1, 0, 1, -1, -1, 1};
 const int dy[8] = {0, 1, 0, -1, 1, 1, -1, -1};
 
+int n, m, k, ids;
+const int MAX = 310;
+int a[MAX][MAX];
+vector<string> s(MAX);
+ 
+void dfs(int sx, int sy, int ex, int ey) {
+	int pxi = -1, pyi = -1, pxj = -1, pyj = -1;
+	for (int i = sx; i <= ex; ++i) {
+		for (int j = sy; j <= ey; ++j) {
+			if (s[i][j] == '#') {
+				if (pxi == -1) pxi = i, pyi = j;
+				else if (pxj == -1) pxj = i, pyj = j;
+      }
+    }
+  }
+	if (pxj == -1) {
+		++ids;
+		for (int i = sx; i <= ex; ++i) {
+			for (int j = sy; j <= ey; ++j) {
+				a[i][j] = ids;
+      }
+    }
+		return;
+  }
+	if (pxi != pxj) {
+		int z = min(pxi, pxj);
+		dfs(sx, sy, z, ey);
+		dfs(z + 1, sy, ex, ey);
+	} else {
+		int z = min(pyi, pyj);
+		dfs(sx, sy, ex, z);
+		dfs(sx, z + 1, ex, ey);
+  }
+}
+
 void solve() {
-  
+	cin >> n >> m >> k;
+	rep(i, n) cin >> s[i];
+
+	dfs(0, 0, n-1, m-1);
+
+	for (int i = 0; i < n; ++i, puts(""))
+		for (int j = 0; j < m; ++j) cout << a[i][j] << " ";
 }
 
 signed main() {

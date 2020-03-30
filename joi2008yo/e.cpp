@@ -48,14 +48,8 @@ const ll MOD = 1000000007; // 10^9 + 7
 const int dx[8] = {1, 0, -1, 0, 1, -1, -1, 1};
 const int dy[8] = {0, 1, 0, -1, 1, 1, -1, -1};
 
-ll r, c;
-
-void mycopy(vector<vector<bool>> &from, vector<vector<bool>> &to) {
-  rep(i, r)rep(j, c) to[i][j] = from[i][j];
-}
-
 void solve() {
-  cin >> r >> c;
+  ll r, c; cin >> r >> c;
   vector<vector<bool>> tbl(r);
   rep(i, r) {
     tbl[i].resize(c);
@@ -69,7 +63,7 @@ void solve() {
   vector<vector<bool>> cpy(r); rep(i, r) cpy[i].resize(c);
 
   for (int i = 0; i < (1<<r); i++) {
-    mycopy(tbl, cpy);
+    copy(all(tbl), cpy.begin());
 
     for (int j = 0; j < r; j++) {
       if ((i >> j) & 1) {

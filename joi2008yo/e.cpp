@@ -59,25 +59,25 @@ void solve() {
     }
   }
 
-  ll ans = 0;
+  ll ans = 0, sum = 0, cnt = 0;
   vector<vector<bool>> cpy(r); rep(i, r) cpy[i].resize(c);
 
-  for (int i = 0; i < (1<<r); i++) {
+  for (int i = 0; i < (1<<r); ++i) {
     copy(all(tbl), cpy.begin());
 
-    for (int j = 0; j < r; j++) {
+    for (int j = 0; j < r; ++j) {
       if ((i >> j) & 1) {
-        for (int k = 0; k < c; k++) {
+        for (int k = 0; k < c; ++k) {
           cpy[j][k] = !cpy[j][k];
         }
       }
     }
 
-    ll sum = 0;
-    for (int ci = 0; ci < c; ci++) {
-      ll cnt = 0;
-      for (int ri = 0; ri < r; ri++) {
-        if (cpy[ri][ci]) cnt++;
+    sum = 0;
+    for (int ci = 0; ci < c; ++ci) {
+      cnt = 0;
+      for (int ri = 0; ri < r; ++ri) {
+        if (cpy[ri][ci]) ++cnt;
       }
       sum += max(cnt, r-cnt);
     }

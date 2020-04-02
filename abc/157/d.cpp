@@ -3,56 +3,110 @@
 #include <cassert>
 #include <cmath>
 #include <ctime>
+#include <cstring>
 #include <functional>
 #include <iostream>
+#include <iomanip>
+#include <limits>
 #include <map>
 #include <queue>
 #include <set>
 #include <stack>
 #include <string>
+#include <regex>
 #include <vector>
 
-#define REP(i,n)   for (int i = 0; i < (n); ++i)
-#define SORT(a)    sort((a).begin(), (a).end());
-#define UNIQ(a)    SORT(a);(a).erase(unique((a).begin(), (a).end()), (a).end());
-#define FIND(a,x)  find((a).begin(), (a).end(), (x)) != (a).end()
-#define REVERSE(a) reverse((a).begin(), (a).end());
+#define fix(n)          cout<<fixed<<setprecision(n)
+#define rep(i,n)        for (int i = 0; i < (n); ++i)
+#define all(a)          (a).begin(), (a).end()
+#define sort(a)         sort(all(a))
+#define uniq(a)         sort(a);(a).erase(unique(all(a)), (a).end())
+#define reverse(a)      reverse(all(a))
+#define ctos(c)         string(1, (c))
+#define out(d)          cout << (d)
+#define outl(d)         std::cout<<(d)<<"\n"
+#define YES()           cout << "YES" << endl
+#define NO()            cout << "NO" << endl
+#define Yes()           cout << "Yes" << endl
+#define No()            cout << "No" << endl
+#define ceil(x, y)      ((x + y - 1) / (y))
+#define debug(x)        cerr << #x << ": " << (x) << '\n'
+#define debug2(x, y)    cerr << #x << ": " << (x) << ", " << #y << ": " << (y) << '\n'
+#define debug3(x, y, z) cerr << #x << ": " << (x) << ", " << #y << ": " << (y) << ", " << #z << ": " << (z) << '\n'
+#define dbg(v)          for (size_t _ = 0; _ < v.size(); ++_){ cerr << #v << "[" << _ << "] : " << v[_] << '\n'; }
+#define pb              push_back
+#define fst             first
+#define int             long long
+#define INF             __LONG_LONG_MAX__
 
 using namespace std;
 using ll = long long;
-using P = pair<int,int>;
+using ld = long double;
+using P = pair<ll,ll>;
 
-const int MOD = 1000000007; // 10^9 + 7
+const ll MOD = 1000000007; // 10^9 + 7
+const int dx[8] = {1, 0, -1, 0, 1, -1, -1, 1};
+const int dy[8] = {0, 1, 0, -1, 1, 1, -1, -1};
 
-int main() {
-  cin.tie(0);
-  ios::sync_with_stdio(false);
+struct UnionFind {
+  vector<int> par;
+  
+  UnionFind(int n) : par(n, -1) { }
 
-  int N, M, K; cin >> N >> M >> K;
-  vector<vector<int>> friends(N), blocks(N);
-  REP(i, M) {
-    int a, b; cin >> a >> b;
-    friends[a - 1].push_back(b - 1);
-    friends[b - 1].push_back(a - 1);
+  int root(int x) {
+    if (par[x] < 0) return x;
+    else return par[x] = root(par[x]);
   }
-  REP(i, K) {
-    int a, b; cin >> a >> b;
-    blocks[a - 1].push_back(b - 1);
-    blocks[b - 1].push_back(a - 1);
+  
+  bool issame(int x, int y) {
+    return root(x) == root(y);
   }
-  vector<set<int>> candidates(N);
+  
+  bool merge(int x, int y) {
+    x = root(x); y = root(y);
+    if (x == y) return false;
+    if (par[x] > par[y]) swap(x, y); // merge technique
+    par[x] += par[y];
+    par[y] = x;
+    return true;
+  }
+  
+  int size(int x) {
+    return -par[root(x)];
+  }
+};
 
-  REP(i, N) {
-    for (int j = 0; j < friends[i].size(); j++) {
-      candidates[i].insert(friends[i][j]);
-    }
-    candidates[i].erase(i);
-    
+void solve() {
+  int N, M, K;
+  cin >> N >> M >> K;
+  vector<set<int> > dame(N);
+  UnionFind uf(N);
+  for (int i = 0; i < M; ++i) {
+    int a, b; cin >> a >> b; --a, --b;
+    dame[a].insert(b);
+    dame[b].insert(a);
+    uf.merge(a, b);
+  }
+  for (int i = 0; i < K; ++i) {
+    int c, d; cin >> c >> d; --c, --d;
+    if (!uf.issame(c, d)) continue;
+    dame[c].insert(d);
+    dame[d].insert(c);
   }
 
-  REP(i, N) {
-    cout << candidates[i].size();
-    if (i != N - 1) cout << " ";
+  for (int i = 0; i < N; ++i) {
+    int mem = uf.size(i) - 1; // 同じ連結成分の「自分以外」の人数
+    mem -= dame[i].size(); // その中ですでに友達かブロック関係の人数
+    cout << mem << " ";
   }
   cout << endl;
+}
+
+signed main() {
+  cin.tie(0);
+  ios::sync_with_stdio(false);
+  srand((unsigned)time(NULL));
+  fix(12);
+
+  solve();
 }

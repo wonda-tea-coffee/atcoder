@@ -121,11 +121,11 @@ void solve() {
   DisjointSet ds(n);
   rep(i, H)rep(j, W) {
     if (i + 1 < H && grid[i][j] != grid[i + 1][j]) {
-      // 縦に伸びる辺を併合
+      // 縦に伸びる頂点同士を併合
       ds.unite(W * i + j, W * (i + 1) + j);
     }
     if (j + 1 < W && grid[i][j] != grid[i][j + 1]) {
-      // 横に伸びる辺を併合
+      // 横に伸びる頂点同士を併合
       ds.unite(W * i + j, W * i + j + 1);
     }
   }

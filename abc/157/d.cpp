@@ -50,56 +50,65 @@ const int dy[8] = {0, 1, 0, -1, 1, 1, -1, -1};
 
 struct UnionFind {
   vector<int> par;
-  
+    
   UnionFind(int n) : par(n, -1) { }
 
   int root(int x) {
     if (par[x] < 0) return x;
     else return par[x] = root(par[x]);
   }
-  
-  bool issame(int x, int y) {
+    
+  bool same(int x, int y) {
     return root(x) == root(y);
   }
   
-  bool merge(int x, int y) {
+  void merge(int x, int y) {
     x = root(x); y = root(y);
-    if (x == y) return false;
+    if (x == y) return;
     if (par[x] > par[y]) swap(x, y); // merge technique
     par[x] += par[y];
     par[y] = x;
-    return true;
   }
-  
+    
   int size(int x) {
     return -par[root(x)];
   }
 };
 
+template<class T>
+void outvo(vector<T> v) {
+  if (v.size() == 0) return;
+  cout << v[0];
+  for (int i = 1; i < v.size(); i++)
+    cout << " " << v[i];
+  cout << endl;
+}
+
 void solve() {
-  int N, M, K;
-  cin >> N >> M >> K;
-  vector<set<int> > dame(N);
+  ll N, M, K; cin >> N >> M >> K;
   UnionFind uf(N);
-  for (int i = 0; i < M; ++i) {
-    int a, b; cin >> a >> b; --a, --b;
+  vector<set<ll>> dame(N);
+
+  rep(i, M) {
+    ll a, b; cin >> a >> b;
+    a--; b--;
     dame[a].insert(b);
     dame[b].insert(a);
     uf.merge(a, b);
   }
-  for (int i = 0; i < K; ++i) {
-    int c, d; cin >> c >> d; --c, --d;
-    if (!uf.issame(c, d)) continue;
-    dame[c].insert(d);
-    dame[d].insert(c);
+  rep(i, K) {
+    ll c, d; cin >> c >> d;
+    c--; d--;
+    if (uf.same(c, d)) {
+      dame[c].insert(d);
+      dame[d].insert(c);
+    }
   }
 
-  for (int i = 0; i < N; ++i) {
-    int mem = uf.size(i) - 1; // 同じ連結成分の「自分以外」の人数
-    mem -= dame[i].size(); // その中ですでに友達かブロック関係の人数
-    cout << mem << " ";
-  }
-  cout << endl;
+  vector<ll> ans(N);
+  rep(i, N) ans[i] = uf.size(i) - dame[i].size() - 1;
+
+  outvo(ans);
 }
 
 signed main() {

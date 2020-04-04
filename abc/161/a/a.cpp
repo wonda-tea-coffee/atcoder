@@ -50,7 +50,10 @@ const int dx[8] = {1, 0, -1, 0, 1, -1, -1, 1};
 const int dy[8] = {0, 1, 0, -1, 1, 1, -1, -1};
 
 void solve() {
-  
+  ll X, Y, Z; cin >> X >> Y >> Z;
+  swap(X, Y);
+  swap(X, Z);
+  cout << X << " " << Y << " " << Z << endl;
 }
 
 signed main() {

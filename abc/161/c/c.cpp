@@ -57,12 +57,8 @@ ll gcd(ll a, ll b) {
 
 void solve() {
   ll N, K; cin >> N >> K;
-  if (N <= K) outl(min(N, K - N));
-  else if (N % K == 0) outl(0);
-  else {
-    N %= K;
-    outl(min(N, abs(N - K)));
-  }
+  N %= K;
+  outl(min(N, K - N));
 }
 
 signed main() {

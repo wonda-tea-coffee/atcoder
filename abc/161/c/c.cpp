@@ -49,8 +49,18 @@ const ll MOD = 1000000007; // 10^9 + 7
 const int dx[8] = {1, 0, -1, 0, 1, -1, -1, 1};
 const int dy[8] = {0, 1, 0, -1, 1, 1, -1, -1};
 
+ll gcd(ll a, ll b) {
+  if (a < b) return gcd(b, a);
+  if (b == 0) return a;
+  return gcd(b, a % b);
+}
+
 void solve() {
-  
+  ll N, K; cin >> N >> K;
+  if (N == 0) outl(K);
+  else if (N <= K) outl(min(N, K - N));
+  else if (N % K == 0) outl(0);
+  else outl(gcd(N, K));
 }
 
 signed main() {

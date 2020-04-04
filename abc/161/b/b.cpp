@@ -50,7 +50,19 @@ const int dx[8] = {1, 0, -1, 0, 1, -1, -1, 1};
 const int dy[8] = {0, 1, 0, -1, 1, 1, -1, -1};
 
 void solve() {
-  
+  ll N, M; cin >> N >> M;
+  vector<ll> a(N);
+  ld sum = 0;
+  rep(i, N) {
+    cin >> a[i];
+    sum += a[i];
+  }
+  ll cnt = 0;
+  rep(i, N) {
+    if (a[i] >= sum / (4*M)) cnt++;
+  }
+  if (cnt >= M) Yes();
+  else No();
 }
 
 signed main() {

@@ -59,7 +59,10 @@ void solve() {
   ll N, K; cin >> N >> K;
   if (N <= K) outl(min(N, K - N));
   else if (N % K == 0) outl(0);
-  else outl(gcd(N, K));
+  else {
+    N %= K;
+    outl(min(N, abs(N - K)));
+  }
 }
 
 signed main() {

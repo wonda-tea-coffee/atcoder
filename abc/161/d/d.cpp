@@ -50,7 +50,16 @@ const int dx[8] = {1, 0, -1, 0, 1, -1, -1, 1};
 const int dy[8] = {0, 1, 0, -1, 1, 1, -1, -1};
 
 void solve() {
-  
+  ll k; cin >> k;
+  queue<ll> q;
+  for (int i = 1; i < 10; i++) q.push(i);
+  rep(i, k-1) {
+    ll x = q.front(); q.pop();
+    if (x % 10 != 0) q.push(x * 10 + (x % 10 - 1));
+    q.push(x * 10 + x % 10);
+    if (x % 10 != 9) q.push(x * 10 + (x % 10 + 1));
+  }
+  outl(q.front());
 }
 
 signed main() {

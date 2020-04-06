@@ -8,6 +8,7 @@
 #include <iostream>
 #include <iomanip>
 #include <limits>
+#include <list>
 #include <map>
 #include <queue>
 #include <set>
@@ -20,7 +21,7 @@
 #define rep(i,n)        for (int i = 0; i < (n); ++i)
 #define all(a)          (a).begin(), (a).end()
 #define sort(a)         sort(all(a))
-#define uniq(a)         sort(a);(a).erase(unique(all(a), (a).end())
+#define uniq(a)         sort(a);(a).erase(unique(all(a)), (a).end())
 #define reverse(a)      reverse(all(a))
 #define ctos(c)         string(1, (c))
 #define out(d)          cout << (d)
@@ -49,19 +50,24 @@ const int dx[8] = {1, 0, -1, 0, 1, -1, -1, 1};
 const int dy[8] = {0, 1, 0, -1, 1, 1, -1, -1};
 
 void solve() {
-  ll n; cin >> n;
+  int n; cin >> n;
   string s; cin >> s;
-  ll ans = 0;
-
-  for (int i = 0; i < s.size() - 1; i++) {
-    if (s[i] == '#' && s[i+1] == '.') {
-      if (i >= 1 && s[i-1] == '#') s[i+1] = '#';
-      else s[i] = '.';
-      ans++;
-    }
+  vector<ll> cntb(n+1), cntw(n+1);
+  for (int i = 1; i <= n; i++) {
+    cntb[i] += cntb[i-1];
+    if (s[i-1] == '#') cntb[i]++;
   }
-
-  outl(ans);
+  for (int i = n-1; i >= 0; i--) {
+    cntw[i] += cntw[i+1];
+    if (s[i] == '.') cntw[i]++;
+  }
+  ll ans = INF;
+  rep(i, n+1) {
+    // debug2(cntb[i], cntw[i]);
+    ans = min(ans, cntb[i] + cntw[i]);
+  }
+  if (ans == INF) outl(0);
+  else outl(ans);
 }
 
 signed main() {

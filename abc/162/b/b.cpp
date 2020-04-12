@@ -50,7 +50,12 @@ const int dx[8] = {1, 0, -1, 0, 1, -1, -1, 1};
 const int dy[8] = {0, 1, 0, -1, 1, 1, -1, -1};
 
 void solve() {
-  
+  ll n; cin >> n;
+  ll sum = 0;
+  for (int i = 1; i <= n; i++) {
+    if (i % 3 > 0 && i % 5 > 0) sum += i;
+  }
+  outl(sum);
 }
 
 signed main() {

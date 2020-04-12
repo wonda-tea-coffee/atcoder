@@ -49,8 +49,21 @@ const ll MOD = 1000000007; // 10^9 + 7
 const int dx[8] = {1, 0, -1, 0, 1, -1, -1, 1};
 const int dy[8] = {0, 1, 0, -1, 1, 1, -1, -1};
 
+ll gcd(ll a, ll b) {
+  if (a < b) return gcd(b, a);
+  if (b == 0) return a;
+  return gcd(b, a % b);
+}
+
 void solve() {
-  
+  ll k; cin >> k;
+  ll sum = 0;
+  for (int a = 1; a <= k; a++)
+  for (int b = 1; b <= k; b++)
+  for (int c = 1; c <= k; c++) {
+    sum += gcd(gcd(a, b), c);
+  }
+  outl(sum);
 }
 
 signed main() {

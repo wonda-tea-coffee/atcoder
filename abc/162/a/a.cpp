@@ -50,7 +50,14 @@ const int dx[8] = {1, 0, -1, 0, 1, -1, -1, 1};
 const int dy[8] = {0, 1, 0, -1, 1, 1, -1, -1};
 
 void solve() {
-  
+  string n; cin >> n;
+  for (char c : n) {
+    if (c == '7') {
+      Yes();
+      return;
+    }
+  }
+  No();
 }
 
 signed main() {

@@ -49,13 +49,15 @@ const ll MOD = 1000000007; // 10^9 + 7
 const int dx[8] = {1, 0, -1, 0, 1, -1, -1, 1};
 const int dy[8] = {0, 1, 0, -1, 1, 1, -1, -1};
 
+ll n;
+
+ll f(ll k) {
+  return k * (n/k) * (n/k+1) / 2;
+}
+
 void solve() {
-  ll n; cin >> n;
-  ll sum = 0;
-  for (int i = 1; i <= n; i++) {
-    if (i % 3 > 0 && i % 5 > 0) sum += i;
-  }
-  outl(sum);
+  cin >> n;
+  outl(f(1) - f(3) - f(5) + f(15));
 }
 
 signed main() {

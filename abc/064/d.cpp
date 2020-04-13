@@ -50,29 +50,28 @@ const int dx[8] = {1, 0, -1, 0, 1, -1, -1, 1};
 const int dy[8] = {0, 1, 0, -1, 1, 1, -1, -1};
 
 void solve() {
-  ll n; cin >> n;
-  string s; cin >> s;
-  deque<char> ans;
-  stack<ll> left;
-  rep(i, n) {
-    if (s[i] == '(') {
-      left.push(i);
-    } else if (left.empty()) {
-      ans.push_front('(');
-      ans.push_back(')');
-    } else {
-      left.pop();
-      ans.push_back('(');
-      ans.push_back(')');
+  ll N; string S;
+  cin >> N >> S;
+
+  int cnt = 0, pre = 0;
+  rep(i, N) {
+    if (S[i] == '(') cnt++;
+    else {
+      cnt--;
+      if (cnt < 0) pre = max(pre, -cnt);
     }
-    outl(string(all(ans)));
   }
-  while (!left.empty()) {
-    left.pop();
-    ans.push_front('(');
-    ans.push_back(')');
+  rep(i, pre) S = "(" + S;
+  N += pre;
+
+  cnt = 0;
+  rep(i, N) {
+    if (S[i] == '(') cnt++;
+    else cnt--;
   }
-  outl(string(all(ans)));
+  rep(i, cnt) S = S + ")";
+
+  cout << S << endl;
 }
 
 signed main() {

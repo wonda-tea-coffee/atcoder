@@ -50,7 +50,16 @@ const int dx[8] = {1, 0, -1, 0, 1, -1, -1, 1};
 const int dy[8] = {0, 1, 0, -1, 1, 1, -1, -1};
 
 void solve() {
-  
+  const ll MAXN = 2*100000+1;
+  ll nums[MAXN] = {};
+  ll n; cin >> n;
+  rep(i, n-1) {
+    ll a; cin >> a;
+    nums[a]++;
+  }
+  for (int i = 1; i <= n; i++) {
+    outl(nums[i]);
+  }
 }
 
 signed main() {

@@ -50,7 +50,8 @@ const int dx[8] = {1, 0, -1, 0, 1, -1, -1, 1};
 const int dy[8] = {0, 1, 0, -1, 1, 1, -1, -1};
 
 void solve() {
-  
+    ld r; cin >> r;
+    outl(2 * r * M_PI);
 }
 
 signed main() {
